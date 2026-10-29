@@ -1,0 +1,23 @@
+# ---- Seguridad del servidor (Apache) ----
+
+# No listar el contenido de las carpetas
+Options -Indexes
+
+# Bloquear archivos ocultos (.git, .htaccess, .gitignore...) y archivos sensibles
+<FilesMatch "(^\.|\.(sql|md|txt|log|ini|bak|old|orig|swp|sh|env|json|lock)$)">
+    Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+
+# Ocultar la versión de Apache/PHP en las páginas de error
+ServerSignature Off
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set Referrer-Policy "same-origin"
+    Header unset X-Powered-By
+</IfModule>
+
+# Limitar el tamaño de las peticiones (2 MB)
+LimitRequestBody 2097152

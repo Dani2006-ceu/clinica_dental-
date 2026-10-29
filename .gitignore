@@ -1,0 +1,6 @@
+config/credenciales.php
+logs/*
+!logs/.htaccess
+
+database/infinityfree.sql
+ADMIN.txt
